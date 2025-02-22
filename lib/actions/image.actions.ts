@@ -9,11 +9,14 @@ import { redirect } from "next/navigation";
 
 import { v2 as cloudinary } from 'cloudinary'
 
-const populateUser = (query: any) => query.populate({
+import { Query } from "mongoose";
+// Asumiendo que el query es de tipo Query<any, any>
+const populateUser = (query: Query<any, any>) => query.populate({
   path: 'author',
   model: User,
   select: '_id firstName lastName clerkId'
-})
+});
+
 
 // ADD IMAGE
 export async function addImage({ image, userId, path }: AddImageParams) {
